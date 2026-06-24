@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+</head>
+<body style="background-image: url('Xiaohongshu_ BurningAI.jpeg'); background-size: fill;">
+     <header style="padding-left: 520px; font-family: cursive;">Calculator</header>
+   <div>
+     <div id="inputs" style="color: rgb(156, 106, 106);" style="align-content: center;">
+          <input type="text" id="expression"  style="padding: 10px;  margin-left: 500px;" style="border-radius: 150px;" >
+          <input type="button"  id="equals" value="=">
+     </div>
+          
+     <h1  id="results" style="border-top: 250px; border-width: 20px; font-family: monospace; color: rgb(187, 255, 245); background-color: rgba(34, 67, 200, 0.852); margin-right: 1300px;"></h1>
+   
+
+   </div>
+   <script>
+    let expression = document.getElementById("expression");
+    const equal = document.getElementById("equals");
+    let result = document.getElementById("results");
+    
+equal.addEventListener("click", (e) => {
+    let item = expression.value;
+    console.log(eval(expression.value));
+     result.innerHTML = eval(item);
+});
+   </script>
+</body>
+</html>

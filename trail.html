@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Israel | Personal Website</title>
+
+    <!-- Modern styling -->
+    <style>
+        :root {
+            --bg: #0b0e14;
+            --fg: #e6e9ef;
+            --accent: #7aa2f7;
+            --accent2: #9ece6a;
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: radial-gradient(circle at 20% 20%, #1a1f2e, var(--bg));
+            color: var(--fg);
+            overflow-x: hidden;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 2rem;
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        nav a {
+            color: var(--fg);
+            text-decoration: none;
+            margin-left: 1.5rem;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        nav a:hover { color: var(--accent); }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            min-height: 80vh;
+        }
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            line-height: 1.1;
+            margin-bottom: 2rem;
+        }
+        p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            max-width: 900px;
+        }
+        .card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            animation: fadeIn 0.6s ease;
+        }
+        footer {
+            text-align: center;
+            padding: 2rem;
+            opacity: 0.7;
+        }
+        .shapes {
+            position: fixed;
+            inset: 0;
+            overflow: hidden;
+            z-index: -1;
+        }
+        .shape {
+            position: absolute;
+            border-radius: 24px;
+            opacity: 0.15;
+            animation: float 20s linear infinite;
+        }
+        .shape.one {
+            width: 300px; height: 300px;
+            background: var(--accent);
+            top: 10%; left: 5%;
+        }
+        .shape.two {
+            width: 220px; height: 220px;
+            background: var(--accent2);
+            bottom: 15%; right: 10%;
+            animation-duration: 28s;
+        }
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-40px) rotate(20deg); }
+            100% { transform: translateY(0) rotate(0deg); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="shapes">
+        <div class="shape one"></div>
+        <div class="shape two"></div>
+    </div>
+
+    <nav>
+        <strong>Israel</strong>
+        <div>
+            <a onclick="loadPage('home')">Home</a>
+            <a onclick="loadPage('about')">Description</a>
+            <a onclick="loadPage('contact')">Contact</a>
+        </div>
+    </nav>
+
+    <main class="container" id="app"></main>
+
+    <footer>© 2025 Israel</footer>
+
+    <!-- JavaScript SPA logic -->
+    <script>
+        const app = document.getElementById('app');
+
+        const pages = {
+            home: `
+                <div class="card">
+                    <h1>Thinking Across Medicine, Science, and Technology</h1>
+                    <p>
+                    I approach medicine as a systems science. Biological phenomena are inseparable
+                    from physics, chemistry, mathematics, and information theory. My work is driven
+                    by the need to understand mechanisms deeply and translate understanding into
+                    meaningful improvement of human life.
+                    </p>
+                </div>
+            `,
+            about: `
+                <div class="card">
+                    <h1>A Description</h1>
+                    <p>
+                    Israel is a medical student defined by disciplined curiosity and integrative
+                    thinking. He does not treat knowledge as isolated domains; instead, he searches
+                    for governing principles that unify cellular pathology, neural signaling,
+                    physical law, and computation.
+                    <br><br>
+                    His intellectual orientation is forward-looking. Medicine, for him, is both
+                    a human science and an engineering challenge. He is interested in how systems
+                    fail, how they may be repaired, and how identity can be preserved while
+                    capability is extended through technology.
+                    <br><br>
+                    Clarity of reasoning, ethical responsibility, and patient-centered impact
+                    form the core constraints within which his ambitions operate.
+                    </p>
+                </div>
+            `,
+            contact: `
+                <div class="card">
+                    <h1>Contact</h1>
+                    <p>Email: <strong>your_email@example.com</strong></p>
+                </div>
+            `
+        };
+
+        function loadPage(page) {
+            app.innerHTML = pages[page];
+            history.pushState({ page }, '', page === 'home' ? '/' : '#' + page);
+        }
+
+        window.onpopstate = (e) => {
+            if (e.state && e.state.page) {
+                app.innerHTML = pages[e.state.page];
+            }
+        };
+
+        loadPage('home');
+    </script>
+
+</body>
+</html>
